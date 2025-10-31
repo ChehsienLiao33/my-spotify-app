@@ -13,32 +13,40 @@ public class SpotifyLikeAppExampleCode {
   private static Clip audioClip;
 
   /*
-    *** IMPORTANT NOTE FOR ALL STUDENTS ***
+   *** IMPORTANT NOTE FOR ALL STUDENTS ***
+   * 
+   * This next line of code is a "path" that students will need to change in order
+   * to play music on their
+   * computer. The current path is for my laptop, not yours.
+   * 
+   * If students who do not understand whre files are located on their computer or
+   * how paths work on their computer,
+   * should immediately complete the extra credit on "Folders and Directories" in
+   * the canvas modules.
+   * 
+   * Knowing how paths work is fundamental knowledge for using a computer as a
+   * technical person.
+   * 
+   * The play function in this example code plays one song. Once student change
+   * the directoryPath variable properly,
+   * one of the songs should play. Students should implement their own code for
+   * all the functionality in the assignment.
+   * 
+   * Students can use, and find their own music. You do not have to use or listen
+   * to my example music! Have fun!
+   * 
+   * Students who do not know what a path is on their computers, and how to use a
+   * path, are often unable complete
+   * this assignment succesfullly. If this is your situation, please complete the
+   * extra credit on Folders Path,
+   * and Directories. Also, please do google and watch youtube videos if that is
+   * helpful too.
+   * 
+   * Thank you! -Gabriel
+   * 
+   */
 
-    This next line of code is a "path" that students will need to change in order to play music on their
-    computer.  The current path is for my laptop, not yours.
-    
-    If students who do not understand whre files are located on their computer or how paths work on their computer, 
-    should immediately complete the extra credit on "Folders and Directories" in the canvas modules.  
-    
-    Knowing how paths work is fundamental knowledge for using a computer as a technical person.
-
-    The play function in this example code plays one song. Once student change the directoryPath variable properly,
-    one of the songs should play. Students should implement their own code for 
-    all the functionality in the assignment.
-    
-    Students can use, and find their own music. You do not have to use or listen to my example music! Have fun!
-
-    Students who do not know what a path is on their computers, and how to use a path, are often unable complete
-    this assignment succesfullly. If this is your situation, please complete the extra credit on Folders Path,
-    and Directories. Also, please do google and watch youtube videos if that is helpful too.
-    
-    Thank you! -Gabriel
-
-    */
-
-  private static String directoryPath =
-    "/Users/youjia/Documents/GitHub/my-spotify-app/my-spotity-app/src/main/java/com/example/";
+  private static String directoryPath = "/Users/youjia/Documents/GitHub/my-spotify-app/my-spotity-app/src/main/java/com/example/";
 
   // "main" makes this class a java app that can be executed
   public static void main(final String[] args) {
@@ -49,6 +57,9 @@ public class SpotifyLikeAppExampleCode {
     Scanner input = new Scanner(System.in);
 
     String userInput = "";
+
+    Song[] recentPlayedSongs = new Song[0];
+
     while (!userInput.equals("q")) {
       menu();
 
@@ -74,7 +85,7 @@ public class SpotifyLikeAppExampleCode {
     System.out.println("[H]ome");
     System.out.println("[S]earch by title");
     System.out.println("[L]ibrary");
-    System.out.println("[P]lay");
+    System.out.println("S[t]op playing");
     System.out.println("[Q]uit");
 
     System.out.println("");
@@ -90,10 +101,15 @@ public class SpotifyLikeAppExampleCode {
         System.out.println("-->Home<--");
         break;
       case "s":
-        System.out.println("-->Search by title<--");
+        Scanner inputSongScanner = new Scanner(System.in);
+        System.out.println("Enter the title of the song you would like to play");
+        String songName = inputSongScanner.nextLine();
+        // System.out.println(songName);
+        play(library);
+        System.out.println("Enter t to stop playing");
         break;
       case "l":
-        System.out.println("-->Library<--");
+        printLibrary(library);
         break;
       case "p":
         System.out.println("-->Play<--");
@@ -114,10 +130,12 @@ public class SpotifyLikeAppExampleCode {
     // open the audio file
 
     // get the filePath and open a audio file
-    final Integer i = 3;
+    final Integer i = 5;
     final String filename = library[i].fileName();
     final String filePath = directoryPath + "/wav/" + filename;
     final File file = new File(filePath);
+
+    System.out.println(filename);
 
     // stop the current song from playing, before playing the next one
     if (audioClip != null) {
@@ -156,5 +174,12 @@ public class SpotifyLikeAppExampleCode {
     }
 
     return library;
+  }
+
+  public static void printLibrary(Song[] library) {
+    for (int i = 0; i < library.length; i++) {
+      Song currentSong = library[i];
+      System.out.println(i + ". " + currentSong.name() + ", " + currentSong.artist() + ", " + currentSong.fileName());
+    }
   }
 }
