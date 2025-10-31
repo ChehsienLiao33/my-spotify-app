@@ -28,5 +28,20 @@
     "name": "Willowshade",
     "artist": "Vlad Annenkov",
     "fileName": "vlad-acoustic-inspiration.wav"
+  },
+  {
+    "name": "Fairy and Tale",
+    "artist": "Lobo Loco",
+    "fileName": "loco-fairy.wav"
+  },
+  {
+    "name": "Nobel Piece Prize",
+    "artist": "Taylor & Lopker",
+    "fileName": "taylor-nobel-piece.wav"
+  },
+  {
+    "name": "Unknown Presence",
+    "artist": "Reverend Blackdog",
+    "fileName": "blackdog-unknown-presence.wav"
   }
 ]
