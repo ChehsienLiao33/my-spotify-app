@@ -70,7 +70,7 @@ public class SpotifyLikeAppExampleCode {
       userInput = userInput.toLowerCase();
 
       // do something
-      handleMenu(userInput, library);
+      handleMenu(userInput, library, recentPlayedSongs);
     }
 
     // close the scanner
@@ -81,7 +81,7 @@ public class SpotifyLikeAppExampleCode {
    * displays the menu for the app
    */
   public static void menu() {
-    System.out.println("---- SpotifyLikeApp ----");
+    System.out.println("---- My Music App ----");
     System.out.println("[H]ome");
     System.out.println("[S]earch by title");
     System.out.println("[L]ibrary");
@@ -95,10 +95,12 @@ public class SpotifyLikeAppExampleCode {
   /*
    * handles the user input for the app
    */
-  public static void handleMenu(String userInput, Song[] library) {
+  public static void handleMenu(String userInput, Song[] library, Song[] recentPlayedSongs) {
     switch (userInput) {
       case "h":
-        System.out.println("-->Home<--");
+        System.out.println("-- Songs you have played recently: --");
+        printLibrary(recentPlayedSongs);
+        System.out.println("-------------------------------------");
         break;
       case "s":
         Scanner inputSongScanner = new Scanner(System.in);
@@ -176,10 +178,15 @@ public class SpotifyLikeAppExampleCode {
     return library;
   }
 
+  public static void printSong(int songId, Song currentSong) {
+    System.out
+        .println(songId + ". " + currentSong.name() + ", " + currentSong.artist() + ", " + currentSong.fileName());
+  }
+
   public static void printLibrary(Song[] library) {
     for (int i = 0; i < library.length; i++) {
       Song currentSong = library[i];
-      System.out.println(i + ". " + currentSong.name() + ", " + currentSong.artist() + ", " + currentSong.fileName());
+      printSong(i, currentSong);
     }
   }
 }
