@@ -128,16 +128,15 @@ public class SpotifyLikeAppExampleCode {
         // Play the selected song
         play(songNumberByName - 1, library);
 
-        // Stop playing if t is entered
-        System.out.println("Enter t to stop playing");
+        // Get input of additional operations
         songName = inputSongNameScanner.nextLine();
-
-        while (!"t".equalsIgnoreCase(songName.trim())) {
-          System.out.println("Enter t to stop playing");
+        while (true) {
+          if (!handleAdditionalMenu(songName.trim(), songNumberByName - 1, library)) {
+            break;
+          }
+          additionalMenu();
           songName = inputSongNameScanner.nextLine();
         }
-
-        audioClip.stop();
 
         break;
       case "l":
@@ -164,21 +163,19 @@ public class SpotifyLikeAppExampleCode {
 
         break;
       case "p":
-        System.out.println("-->Play<--");
-
         // Play the first song in the list
         play(0, library);
 
-        // Stop playing if t is entered
+        // Get input of additional operations
         Scanner inputStopPlaying = new Scanner(System.in);
-        System.out.println("Enter t to stop playing");
         String stopPlaying = inputStopPlaying.nextLine();
-
-        while (!"t".equalsIgnoreCase(stopPlaying.trim())) {
-          System.out.println("Enter t to stop playing");
+        while (true) {
+          if (!handleAdditionalMenu(stopPlaying.trim(), 0, library)) {
+            break;
+          }
+          additionalMenu();
           stopPlaying = inputStopPlaying.nextLine();
         }
-        audioClip.stop();
 
         break;
       case "q":
