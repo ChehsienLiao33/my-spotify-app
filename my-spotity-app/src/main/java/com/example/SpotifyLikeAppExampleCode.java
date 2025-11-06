@@ -152,12 +152,10 @@ public class SpotifyLikeAppExampleCode {
         Integer songNumber = Integer.valueOf(songNumberString);
         play(songNumber - 1, library);
 
-        // Stop playing if t is entered
-        // System.out.println("Enter t to stop playing");
+        // Get input of additional operations
         songNumberString = inputSongNumberScanner.nextLine();
-
         while (true) {
-          if (!handleAdditionalMenu(songNumberString.trim())) {
+          if (!handleAdditionalMenu(songNumberString.trim(), songNumber - 1, library)) {
             break;
           }
           additionalMenu();
@@ -194,7 +192,10 @@ public class SpotifyLikeAppExampleCode {
   /*
    * Handles the additional menu while a song is playing
    */
-  public static boolean handleAdditionalMenu(String userInput) {
+  public static boolean handleAdditionalMenu(String userInput, Integer songNumber, Song[] library) {
+    Song currentSong = library[songNumber];
+    long currentPosition = 0;
+    long newPosition = 0;
     switch (userInput) {
       case "1":
         if (audioClip.isRunning()) {
@@ -206,8 +207,19 @@ public class SpotifyLikeAppExampleCode {
       case "2":
         return true;
       case "3":
+        currentPosition = audioClip.getMicrosecondPosition();
+        // Rewind 5 secs
+        newPosition = Math.max(0, currentPosition - 5000000);
+        audioClip.setMicrosecondPosition(newPosition);
         return true;
       case "4":
+        currentPosition = audioClip.getMicrosecondPosition();
+        // Forward 5 secs
+        newPosition = currentPosition + 5000000;
+        audioClip.setMicrosecondPosition(newPosition);
+        return true;
+      case "5":
+        currentSong.setFavorite();
         return true;
       case "t":
         audioClip.stop();

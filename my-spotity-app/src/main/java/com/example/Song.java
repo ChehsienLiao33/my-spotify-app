@@ -50,6 +50,10 @@ public class Song {
     return this.genre;
   }
 
+  public void setFavorite() {
+    this.isFavorite = true;
+  }
+
   public boolean isFavorite() {
     return this.isFavorite;
   }
