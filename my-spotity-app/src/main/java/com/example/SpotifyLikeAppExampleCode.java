@@ -50,6 +50,8 @@ public class SpotifyLikeAppExampleCode {
 
   private static Song[] recentPlayedSongs = new Song[0];
 
+  private static Map<Integer, Song> favoriteSongs = new HashMap<>();
+
   // "main" makes this class a java app that can be executed
   public static void main(final String[] args) {
     // Reading audio library from json file
@@ -178,6 +180,32 @@ public class SpotifyLikeAppExampleCode {
         }
 
         break;
+      case "f":
+        System.out.println();
+        System.out.println("-->Favorite Songs<--");
+        for (Integer key : favoriteSongs.keySet()) {
+          printSong(key, favoriteSongs.get(key));
+        }
+        System.out.println();
+
+        // Create a new scanner for song number input
+        Scanner inputFavoriteSongNumberScanner = new Scanner(System.in);
+        System.out.println("Enter the number of the song you would like to play");
+        String favoriteSongNumberString = inputFavoriteSongNumberScanner.nextLine();
+
+        // Play the selected song
+        Integer favoriteSongNumber = Integer.valueOf(favoriteSongNumberString);
+        play(favoriteSongNumber - 1, library);
+
+        // Get input of additional operations
+        favoriteSongNumberString = inputFavoriteSongNumberScanner.nextLine();
+        while (true) {
+          if (!handleAdditionalMenu(favoriteSongNumberString.trim(), favoriteSongNumber - 1, library)) {
+            break;
+          }
+          additionalMenu();
+          favoriteSongNumberString = inputFavoriteSongNumberScanner.nextLine();
+        }
       case "q":
         System.out.println("-->Quit<--");
         break;
@@ -224,6 +252,11 @@ public class SpotifyLikeAppExampleCode {
         return true;
       case "5":
         currentSong.setFavorite();
+        if (currentSong.isFavorite()) {
+          favoriteSongs.put(songNumber, currentSong);
+        } else {
+          favoriteSongs.remove(songNumber);
+        }
         return true;
       case "t":
         audioClip.stop();

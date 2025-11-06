@@ -51,7 +51,12 @@ public class Song {
   }
 
   public void setFavorite() {
-    this.isFavorite = true;
+    if (this.isFavorite) {
+      this.isFavorite = false;
+    } else {
+      this.isFavorite = true;
+    }
+
   }
 
   public boolean isFavorite() {
