@@ -88,8 +88,7 @@ public class SpotifyLikeAppExampleCode {
     System.out.println("[P]lay");
     System.out.println("S[t]op playing");
     System.out.println("[Q]uit");
-
-    System.out.println("");
+    System.out.println("[F]avorites");
     System.out.print("Enter q to Quit:");
   }
 
@@ -256,7 +255,8 @@ public class SpotifyLikeAppExampleCode {
 
   public static void printSong(int songId, Song currentSong) {
     System.out
-        .println(songId + ". " + currentSong.name() + ", " + currentSong.artist() + ", " + currentSong.fileName());
+        .println(songId + ". " + currentSong.name() + ", " + currentSong.artist() + ", " + currentSong.year() + ", "
+            + currentSong.genre() + ", " + currentSong.fileName());
   }
 
   public static void printLibrary(Song[] library) {

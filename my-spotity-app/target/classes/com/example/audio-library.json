@@ -2,26 +2,71 @@
   {
     "name": "Teach Me How to Dougie",
     "artist": "Cali Swag District",
-    "fileName": "dougie-crop.wav"
+    "fileName": "dougie-crop.wav",
+    "year": "2010",
+    "genre": "Hip Hop"
   },
   {
     "name": "Could've Been (Tik Tok Remix)",
     "artist": "H.E.R.",
-    "fileName": "her-crop.wav"
+    "fileName": "her-crop.wav",
+    "year": "2018",
+    "genre": "R&B"
   },
   {
     "name": "On Me",
     "artist": "Lil Baby",
-    "fileName": "lil-baby-crop.wav"
+    "fileName": "lil-baby-crop.wav",
+    "year": "2020",
+    "genre": "Hip Hop"
   },
   {
     "name": "Mo Money Mo Problems",
     "artist": "Notorios BIG",
-	  "fileName": "biggie-crop.wav"
+    "fileName": "biggie-crop.wav",
+    "year": "1997",
+    "genre": "Hip Hop"
   },
   {
     "name": "Industry Baby",
     "artist": "Lil Nas X",
-    "fileName": "lil-nas-x-crop.wav"
+    "fileName": "lil-nas-x-crop.wav",
+    "year": "2021",
+    "genre": "Hip Hop"
+  },
+  {
+    "name": "Willowshade",
+    "artist": "Vlad Annenkov",
+    "fileName": "vlad-acoustic-inspiration.wav",
+    "year": "2025",
+    "genre": "Country"
+  },
+  {
+    "name": "Fairy and Tale",
+    "artist": "Lobo Loco",
+    "fileName": "loco-fairy.wav",
+    "year": "2025",
+    "genre": "Lo-fi Electronic"
+  },
+  {
+    "name": "Nobel Piece Prize",
+    "artist": "Taylor & Lopker",
+    "fileName": "taylor-nobel-piece.wav",
+    "year": "2025",
+    "genre": "Country"
+  },
+  {
+    "name": "Unknown Presence",
+    "artist": "Reverend Blackdog",
+    "fileName": "blackdog-unknown-presence.wav",
+    "year": "2025",
+    "genre": "Rock"
+  },
+  {
+    "name": "Heartbreaker",
+    "artist": "Chris Wolverine Matthew",
+    "fileName": "matthew-heartbreaker.wav",
+    "year": "2025",
+    "genre": "Country"
   }
 ]
