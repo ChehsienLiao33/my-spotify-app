@@ -6,10 +6,10 @@ import java.io.*;
 import java.util.*;
 import javax.sound.sampled.*;
 
-// declares a class for the app
+// Declares a class for the app
 public class SpotifyLikeAppExampleCode {
 
-  // the current audio clip
+  // The current audio clip
   private static Clip audioClip;
 
   /*
@@ -52,10 +52,10 @@ public class SpotifyLikeAppExampleCode {
 
   // "main" makes this class a java app that can be executed
   public static void main(final String[] args) {
-    // reading audio library from json file
+    // Reading audio library from json file
     Song[] library = readAudioLibrary();
 
-    // create a scanner for user input
+    // Create a scanner for user input
     Scanner input = new Scanner(System.in);
 
     String userInput = "";
@@ -63,22 +63,22 @@ public class SpotifyLikeAppExampleCode {
     while (!userInput.equals("q")) {
       menu();
 
-      // get input
+      // Get input
       userInput = input.nextLine();
 
-      // accept upper or lower case commands
+      // Accept upper or lower case commands
       userInput = userInput.toLowerCase();
 
-      // do something
+      // Do something
       handleMenu(userInput, library);
     }
 
-    // close the scanner
+    // Close the scanner
     input.close();
   }
 
   /*
-   * displays the menu for the app
+   * Displays the menu for the app
    */
   public static void menu() {
     System.out.println("---- My Music App ----");
@@ -93,7 +93,19 @@ public class SpotifyLikeAppExampleCode {
   }
 
   /*
-   * handles the user input for the app
+   * Displays the menu while a song is playing
+   */
+  public static void additionalMenu() {
+    System.out.println("---- Playing Operations ----");
+    System.out.println("1 - Pause");
+    System.out.println("2 - Rewind 5 secs");
+    System.out.println("3 - Forward 5 secs");
+    System.out.println("4 - Favorite");
+    System.out.print("Enter t to stop playing:");
+  }
+
+  /*
+   * Handles the user input for the app
    */
   public static void handleMenu(String userInput, Song[] library) {
     switch (userInput) {
@@ -123,6 +135,7 @@ public class SpotifyLikeAppExampleCode {
           System.out.println("Enter t to stop playing");
           songName = inputSongNameScanner.nextLine();
         }
+
         audioClip.stop();
 
         break;
@@ -139,14 +152,16 @@ public class SpotifyLikeAppExampleCode {
         play(songNumber - 1, library);
 
         // Stop playing if t is entered
-        System.out.println("Enter t to stop playing");
+        // System.out.println("Enter t to stop playing");
         songNumberString = inputSongNumberScanner.nextLine();
 
-        while (!"t".equalsIgnoreCase(songNumberString.trim())) {
-          System.out.println("Enter t to stop playing");
+        while (true) {
+          if (!handleAdditionalMenu(songNumberString.trim())) {
+            break;
+          }
+          additionalMenu();
           songNumberString = inputSongNumberScanner.nextLine();
         }
-        audioClip.stop();
 
         break;
       case "p":
@@ -176,12 +191,31 @@ public class SpotifyLikeAppExampleCode {
   }
 
   /*
+   * Handles the additional menu while a song is playing
+   */
+  public static boolean handleAdditionalMenu(String userInput) {
+    switch (userInput) {
+      case "1":
+        return true;
+      case "2":
+        return true;
+      case "3":
+        return true;
+      case "4":
+        return true;
+      case "t":
+        audioClip.stop();
+        return false;
+      default:
+        return true;
+    }
+  }
+
+  /*
    * plays an audio file
    */
   public static void play(final Integer songNumber, Song[] library) {
-    // open the audio file
-
-    // get the filePath and open a audio file
+    // Get the filePath and open a audio file
     final Song currentSong = library[songNumber];
     final String filename = currentSong.fileName();
     final String filePath = directoryPath + "/wav/" + filename;
@@ -192,16 +226,16 @@ public class SpotifyLikeAppExampleCode {
     printSong(songNumber + 1, currentSong);
     System.out.println("");
 
-    // stop the current song from playing, before playing the next one
+    // Stop the current song from playing, before playing the next one
     if (audioClip != null) {
       audioClip.close();
     }
 
     try {
-      // create clip
+      // Create clip
       audioClip = AudioSystem.getClip();
 
-      // get input stream
+      // Get input stream
       final AudioInputStream in = AudioSystem.getAudioInputStream(file);
 
       audioClip.open(in);
@@ -211,12 +245,16 @@ public class SpotifyLikeAppExampleCode {
       e.printStackTrace();
     }
 
+    // Add song to recent played list
     Song[] newArray = new Song[recentPlayedSongs.length + 1];
     for (int i = 0; i < recentPlayedSongs.length; i++) {
       newArray[i] = recentPlayedSongs[i];
     }
     newArray[newArray.length - 1] = currentSong;
     recentPlayedSongs = newArray;
+
+    // Display additional operations while the song is playing
+    additionalMenu();
   }
 
   public static Integer searchSongNumberByName(String songName, Song[] library) {
@@ -254,9 +292,13 @@ public class SpotifyLikeAppExampleCode {
   }
 
   public static void printSong(int songId, Song currentSong) {
+    String favoriteString = "";
+    if (currentSong.isFavorite()) {
+      favoriteString = "[Favorite]";
+    }
     System.out
         .println(songId + ". " + currentSong.name() + ", " + currentSong.artist() + ", " + currentSong.year() + ", "
-            + currentSong.genre() + ", " + currentSong.fileName());
+            + currentSong.genre() + ", " + currentSong.fileName() + " " + favoriteString);
   }
 
   public static void printLibrary(Song[] library) {
