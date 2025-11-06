@@ -97,11 +97,12 @@ public class SpotifyLikeAppExampleCode {
    */
   public static void additionalMenu() {
     System.out.println("---- Playing Operations ----");
-    System.out.println("1 - Pause");
-    System.out.println("2 - Rewind 5 secs");
-    System.out.println("3 - Forward 5 secs");
-    System.out.println("4 - Favorite");
-    System.out.print("Enter t to stop playing:");
+    System.out.println("1 - Pause / Resume");
+    System.out.println("2 - Stop / Restart");
+    System.out.println("3 - Rewind 5 secs");
+    System.out.println("4 - Forward 5 secs");
+    System.out.println("5 - Favorite");
+    System.out.print("Enter t to quit playing:");
   }
 
   /*
@@ -196,6 +197,11 @@ public class SpotifyLikeAppExampleCode {
   public static boolean handleAdditionalMenu(String userInput) {
     switch (userInput) {
       case "1":
+        if (audioClip.isRunning()) {
+          audioClip.stop();
+        } else {
+          audioClip.start();
+        }
         return true;
       case "2":
         return true;
