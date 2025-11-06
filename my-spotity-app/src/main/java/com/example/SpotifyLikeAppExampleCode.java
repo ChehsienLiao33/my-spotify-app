@@ -205,6 +205,13 @@ public class SpotifyLikeAppExampleCode {
         }
         return true;
       case "2":
+        if (audioClip.isRunning()) {
+          audioClip.stop();
+          // Reset the song
+          audioClip.setMicrosecondPosition(0);
+        } else {
+          audioClip.start();
+        }
         return true;
       case "3":
         currentPosition = audioClip.getMicrosecondPosition();
